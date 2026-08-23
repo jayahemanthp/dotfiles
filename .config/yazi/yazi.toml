@@ -1,0 +1,45 @@
+[opener]
+
+# Text/code → Neovim, inside a terminal
+edit = [
+    { run = 'nvim %s', desc = "Edit in Neovim", block = true, for = "unix" },
+]
+
+# PDFs → Firefox
+pdf-view = [
+    { run = 'firefox %s', desc = "Open in Firefox", orphan = true, for = "unix" },
+]
+
+# Videos → VLC
+play = [
+    { run = 'vlc %s', desc = "Play in VLC", orphan = true, for = "unix" },
+]
+
+# Office docs (docx/xlsx/pptx/odt etc) → OnlyOffice
+office = [
+    { run = 'onlyoffice-desktopeditors %s', desc = "Open in OnlyOffice", orphan = true, for = "unix" },
+]
+
+# Images → your image viewer (example: imv)
+image-view = [
+    { run = 'feh %s', desc = "Open in imv", orphan = true, for = "unix" },
+]
+
+[open]
+prepend_rules = [
+    { url = "*/", use = ["edit", "open", "reveal"] },
+    { mime = "text/*", use = "edit" },
+    { url = "*.{conf,ini,yaml,yml,toml,json,md,txt,log,sh,py,js,ts,rs,go,c,cpp,h,lua}", use = "edit" },
+    { url = "*.pdf", use = "pdf-view" },
+    { mime = "video/*", use = "play" },
+    { url = "*.{doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp}", use = "office" },
+    { mime = "image/*", use = "image-view" },
+]
+
+[mgr]
+linemode = "size"
+
+ratio = [1, 4, 3]
+
+sort_by = "natural"
+sort_dir_first = true
